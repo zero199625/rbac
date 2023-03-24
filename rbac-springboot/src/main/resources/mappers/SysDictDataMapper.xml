@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.powernode.mapper.SysDictDataMapper">
+  <resultMap id="BaseResultMap" type="com.powernode.domain.SysDictData">
+    <!--@mbg.generated-->
+    <!--@Table sys_dict_data-->
+    <id column="dict_code" jdbcType="BIGINT" property="dictCode" />
+    <result column="dict_sort" jdbcType="INTEGER" property="dictSort" />
+    <result column="dict_label" jdbcType="VARCHAR" property="dictLabel" />
+    <result column="dict_value" jdbcType="INTEGER" property="dictValue" />
+    <result column="dict_type" jdbcType="VARCHAR" property="dictType" />
+    <result column="dict_skin" jdbcType="VARCHAR" property="dictSkin" />
+    <result column="status" jdbcType="INTEGER" property="status" />
+    <result column="create_by" jdbcType="VARCHAR" property="createBy" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_by" jdbcType="VARCHAR" property="updateBy" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="remark" jdbcType="VARCHAR" property="remark" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    dict_code, dict_sort, dict_label, dict_value, dict_type, dict_skin, `status`, create_by, 
+    create_time, update_by, update_time, remark
+  </sql>
+
+  <!--
+      分页查询字典数据    由于查询参数是确定的，因此不用模糊查询
+  -->
+  <select id="getByPage" resultMap="BaseResultMap">
+    select *
+    from sys_dict_data
+    <where>
+      <if test="params.dictType!=null and params.dictType!=''">
+        dict_type like concat('%',#{params.dictType},'%')
+      </if>
+      <if test="params.dictLabel!=null and params.dictLabel!=''">
+        and dict_label like concat('%',#{params.dictLabel},'%')
+      </if>
+      <if test="params.status!=null">
+        and status=#{params.status}
+      </if>
+    </where>
+  </select>
+
+  <!--
+      根据字典类型获取字典数据
+  -->
+  <select id="getDictDataByDictType" resultMap="BaseResultMap">
+    select *
+    from sys_dict_data
+    <where>
+      <if test="dictType!=null and dictType!=''">
+        dict_type=#{dictType}
+      </if>
+    </where>
+  </select>
+
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    <!--@mbg.generated-->
+    select 
+    <include refid="Base_Column_List" />
+    from sys_dict_data
+    where dict_code = #{dictCode,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    <!--@mbg.generated-->
+    delete from sys_dict_data
+    where dict_code = #{dictCode,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" keyColumn="dict_code" keyProperty="dictCode" parameterType="com.powernode.domain.SysDictData" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into sys_dict_data (dict_sort, dict_label, dict_value, 
+      dict_type, dict_skin, `status`, 
+      create_by, create_time, update_by, 
+      update_time, remark)
+    values (#{dictSort,jdbcType=INTEGER}, #{dictLabel,jdbcType=VARCHAR}, #{dictValue,jdbcType=INTEGER}, 
+      #{dictType,jdbcType=VARCHAR}, #{dictSkin,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER}, 
+      #{createBy,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{updateBy,jdbcType=VARCHAR}, 
+      #{updateTime,jdbcType=TIMESTAMP}, #{remark,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" keyColumn="dict_code" keyProperty="dictCode" parameterType="com.powernode.domain.SysDictData" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into sys_dict_data
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="dictSort != null">
+        dict_sort,
+      </if>
+      <if test="dictLabel != null">
+        dict_label,
+      </if>
+      <if test="dictValue != null">
+        dict_value,
+      </if>
+      <if test="dictType != null">
+        dict_type,
+      </if>
+      <if test="dictSkin != null">
+        dict_skin,
+      </if>
+      <if test="status != null">
+        `status`,
+      </if>
+      <if test="createBy != null">
+        create_by,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="updateBy != null">
+        update_by,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+      <if test="remark != null">
+        remark,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="dictSort != null">
+        #{dictSort,jdbcType=INTEGER},
+      </if>
+      <if test="dictLabel != null">
+        #{dictLabel,jdbcType=VARCHAR},
+      </if>
+      <if test="dictValue != null">
+        #{dictValue,jdbcType=INTEGER},
+      </if>
+      <if test="dictType != null">
+        #{dictType,jdbcType=VARCHAR},
+      </if>
+      <if test="dictSkin != null">
+        #{dictSkin,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="createBy != null">
+        #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateBy != null">
+        #{updateBy,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="remark != null">
+        #{remark,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.powernode.domain.SysDictData">
+    <!--@mbg.generated-->
+    update sys_dict_data
+    <set>
+      <if test="dictSort != null">
+        dict_sort = #{dictSort,jdbcType=INTEGER},
+      </if>
+      <if test="dictLabel != null">
+        dict_label = #{dictLabel,jdbcType=VARCHAR},
+      </if>
+      <if test="dictValue != null">
+        dict_value = #{dictValue,jdbcType=INTEGER},
+      </if>
+      <if test="dictType != null">
+        dict_type = #{dictType,jdbcType=VARCHAR},
+      </if>
+      <if test="dictSkin != null">
+        dict_skin = #{dictSkin,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        `status` = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="createBy != null">
+        create_by = #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateBy != null">
+        update_by = #{updateBy,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="remark != null">
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where dict_code = #{dictCode,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.powernode.domain.SysDictData">
+    <!--@mbg.generated-->
+    update sys_dict_data
+    set dict_sort = #{dictSort,jdbcType=INTEGER},
+      dict_label = #{dictLabel,jdbcType=VARCHAR},
+      dict_value = #{dictValue,jdbcType=INTEGER},
+      dict_type = #{dictType,jdbcType=VARCHAR},
+      dict_skin = #{dictSkin,jdbcType=VARCHAR},
+      `status` = #{status,jdbcType=INTEGER},
+      create_by = #{createBy,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_by = #{updateBy,jdbcType=VARCHAR},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      remark = #{remark,jdbcType=VARCHAR}
+    where dict_code = #{dictCode,jdbcType=BIGINT}
+  </update>
+
+
+</mapper>
