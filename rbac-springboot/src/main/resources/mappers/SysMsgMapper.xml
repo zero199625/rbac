@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.powernode.mapper.SysMsgMapper">
+  <resultMap id="BaseResultMap" type="com.powernode.domain.SysMsg">
+    <!--@mbg.generated-->
+    <!--@Table sys_msg-->
+    <id column="msg_id" jdbcType="INTEGER" property="msgId" />
+    <result column="user_id" jdbcType="INTEGER" property="userId" />
+    <result column="msg_title" jdbcType="VARCHAR" property="msgTitle" />
+    <result column="msg_content" jdbcType="VARCHAR" property="msgContent" />
+    <result column="msg_sender_id" jdbcType="INTEGER" property="msgSenderId" />
+    <result column="msg_receive_id" jdbcType="INTEGER" property="msgReceiveId" />
+    <result column="msg_mailbox" jdbcType="INTEGER" property="msgMailbox" />
+    <result column="msg_type" jdbcType="INTEGER" property="msgType" />
+    <result column="user_type" jdbcType="INTEGER" property="userType" />
+    <result column="msg_read" jdbcType="INTEGER" property="msgRead" />
+    <result column="msg_del" jdbcType="INTEGER" property="msgDel" />
+    <result column="msg_send_time" jdbcType="TIMESTAMP" property="msgSendTime" />
+    <result column="msg_receive_time" jdbcType="TIMESTAMP" property="msgReceiveTime" />
+    <result column="msg_delete_time" jdbcType="TIMESTAMP" property="msgDeleteTime" />
+    <result column="msg_read_time" jdbcType="TIMESTAMP" property="msgReadTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    msg_id, user_id, msg_title, msg_content, msg_sender_id, msg_receive_id, msg_mailbox,
+    msg_type, user_type, msg_read, msg_del, msg_send_time, msg_receive_time, msg_delete_time,
+    msg_read_time
+  </sql>
+
+  <!-- 分页查询邮箱     根据邮箱编号 msgMailbox 查询 -->
+  <select id="getByPage" resultMap="BaseResultMap">
+    select *
+    from sys_msg
+    <where>
+      msg_del=0
+      <if test="params.msgMailbox!=null">
+        and msg_mailbox=#{params.msgMailbox}
+      </if>
+      <if test="params.userId!=null">
+        and user_id=#{params.userId}
+      </if>
+    </where>
+    order by msg_id desc
+  </select>
+
+
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    <!--@mbg.generated-->
+    select
+    <include refid="Base_Column_List" />
+    from sys_msg
+    where msg_id = #{msgId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    <!--@mbg.generated-->
+    delete from sys_msg
+    where msg_id = #{msgId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="msg_id" keyProperty="msgId" parameterType="com.powernode.domain.SysMsg" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into sys_msg (user_id, msg_title, msg_content,
+      msg_sender_id, msg_receive_id, msg_mailbox,
+      msg_type, user_type, msg_read,
+      msg_del, msg_send_time, msg_receive_time,
+      msg_delete_time, msg_read_time)
+    values (#{userId,jdbcType=INTEGER}, #{msgTitle,jdbcType=VARCHAR}, #{msgContent,jdbcType=VARCHAR},
+      #{msgSenderId,jdbcType=INTEGER}, #{msgReceiveId,jdbcType=INTEGER}, #{msgMailbox,jdbcType=INTEGER},
+      #{msgType,jdbcType=INTEGER}, #{userType,jdbcType=INTEGER}, #{msgRead,jdbcType=INTEGER},
+      #{msgDel,jdbcType=INTEGER}, #{msgSendTime,jdbcType=TIMESTAMP}, #{msgReceiveTime,jdbcType=TIMESTAMP},
+      #{msgDeleteTime,jdbcType=TIMESTAMP}, #{msgReadTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" keyColumn="msg_id" keyProperty="msgId" parameterType="com.powernode.domain.SysMsg" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into sys_msg
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="userId != null">
+        user_id,
+      </if>
+      <if test="msgTitle != null">
+        msg_title,
+      </if>
+      <if test="msgContent != null">
+        msg_content,
+      </if>
+      <if test="msgSenderId != null">
+        msg_sender_id,
+      </if>
+      <if test="msgReceiveId != null">
+        msg_receive_id,
+      </if>
+      <if test="msgMailbox != null">
+        msg_mailbox,
+      </if>
+      <if test="msgType != null">
+        msg_type,
+      </if>
+      <if test="userType != null">
+        user_type,
+      </if>
+      <if test="msgRead != null">
+        msg_read,
+      </if>
+      <if test="msgDel != null">
+        msg_del,
+      </if>
+      <if test="msgSendTime != null">
+        msg_send_time,
+      </if>
+      <if test="msgReceiveTime != null">
+        msg_receive_time,
+      </if>
+      <if test="msgDeleteTime != null">
+        msg_delete_time,
+      </if>
+      <if test="msgReadTime != null">
+        msg_read_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="userId != null">
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="msgTitle != null">
+        #{msgTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="msgContent != null">
+        #{msgContent,jdbcType=VARCHAR},
+      </if>
+      <if test="msgSenderId != null">
+        #{msgSenderId,jdbcType=INTEGER},
+      </if>
+      <if test="msgReceiveId != null">
+        #{msgReceiveId,jdbcType=INTEGER},
+      </if>
+      <if test="msgMailbox != null">
+        #{msgMailbox,jdbcType=INTEGER},
+      </if>
+      <if test="msgType != null">
+        #{msgType,jdbcType=INTEGER},
+      </if>
+      <if test="userType != null">
+        #{userType,jdbcType=INTEGER},
+      </if>
+      <if test="msgRead != null">
+        #{msgRead,jdbcType=INTEGER},
+      </if>
+      <if test="msgDel != null">
+        #{msgDel,jdbcType=INTEGER},
+      </if>
+      <if test="msgSendTime != null">
+        #{msgSendTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="msgReceiveTime != null">
+        #{msgReceiveTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="msgDeleteTime != null">
+        #{msgDeleteTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="msgReadTime != null">
+        #{msgReadTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.powernode.domain.SysMsg">
+    <!--@mbg.generated-->
+    update sys_msg
+    <set>
+      <if test="userId != null">
+        user_id = #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="msgTitle != null">
+        msg_title = #{msgTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="msgContent != null">
+        msg_content = #{msgContent,jdbcType=VARCHAR},
+      </if>
+      <if test="msgSenderId != null">
+        msg_sender_id = #{msgSenderId,jdbcType=INTEGER},
+      </if>
+      <if test="msgReceiveId != null">
+        msg_receive_id = #{msgReceiveId,jdbcType=INTEGER},
+      </if>
+      <if test="msgMailbox != null">
+        msg_mailbox = #{msgMailbox,jdbcType=INTEGER},
+      </if>
+      <if test="msgType != null">
+        msg_type = #{msgType,jdbcType=INTEGER},
+      </if>
+      <if test="userType != null">
+        user_type = #{userType,jdbcType=INTEGER},
+      </if>
+      <if test="msgRead != null">
+        msg_read = #{msgRead,jdbcType=INTEGER},
+      </if>
+      <if test="msgDel != null">
+        msg_del = #{msgDel,jdbcType=INTEGER},
+      </if>
+      <if test="msgSendTime != null">
+        msg_send_time = #{msgSendTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="msgReceiveTime != null">
+        msg_receive_time = #{msgReceiveTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="msgDeleteTime != null">
+        msg_delete_time = #{msgDeleteTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="msgReadTime != null">
+        msg_read_time = #{msgReadTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where msg_id = #{msgId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.powernode.domain.SysMsg">
+    <!--@mbg.generated-->
+    update sys_msg
+    set user_id = #{userId,jdbcType=INTEGER},
+      msg_title = #{msgTitle,jdbcType=VARCHAR},
+      msg_content = #{msgContent,jdbcType=VARCHAR},
+      msg_sender_id = #{msgSenderId,jdbcType=INTEGER},
+      msg_receive_id = #{msgReceiveId,jdbcType=INTEGER},
+      msg_mailbox = #{msgMailbox,jdbcType=INTEGER},
+      msg_type = #{msgType,jdbcType=INTEGER},
+      user_type = #{userType,jdbcType=INTEGER},
+      msg_read = #{msgRead,jdbcType=INTEGER},
+      msg_del = #{msgDel,jdbcType=INTEGER},
+      msg_send_time = #{msgSendTime,jdbcType=TIMESTAMP},
+      msg_receive_time = #{msgReceiveTime,jdbcType=TIMESTAMP},
+      msg_delete_time = #{msgDeleteTime,jdbcType=TIMESTAMP},
+      msg_read_time = #{msgReadTime,jdbcType=TIMESTAMP}
+    where msg_id = #{msgId,jdbcType=INTEGER}
+  </update>
+
+
+</mapper>
