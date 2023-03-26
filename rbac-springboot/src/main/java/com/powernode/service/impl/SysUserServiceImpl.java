@@ -75,4 +75,19 @@ public class SysUserServiceImpl implements SysUserService{
         return sysUserMapper.selectByUserName(userName);
     }
 
+    @Override
+    public List<Integer> selectAllNomalUserId() {
+        List<Integer> allNomalUserId = sysUserMapper.selectAllNomalUserId();
+        return allNomalUserId;
+    }
+
+    /**
+     *  查询所有用户信息
+     * @return
+     */
+    @Override
+    public List<SysUser> getAllUser() {
+        return sysUserMapper.getAllUser();
+    }
+
 }

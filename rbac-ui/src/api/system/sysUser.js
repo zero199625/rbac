@@ -1,5 +1,4 @@
 import request from "@/utils/request";
-import {use} from "element-ui";
 
 let moduleName = "/sysUser"
 
@@ -84,11 +83,42 @@ export default {
       url: `${moduleName}/get/` + userId,
       method: "get"
     })
+  },
+
+
+  /**
+   *  根据用户名查询用户id
+   * @param userName
+   * @returns {AxiosPromise}
+   */
+  getUserIdByUserName(userName){
+    return request({
+      url: `${moduleName}/getUserIdByUserName/` + userName,
+      method: "get"
+    })
+  },
+
+  /**
+   *  获取当前用户信息
+   */
+  getUserInfo(){
+    return request({
+      url: `/getUserInfo`,
+      method: "get"
+    })
+  },
+
+
+  /**
+   *  获取所有用户信息
+   * @returns {AxiosPromise}
+   */
+  getAllUser(){
+    return request({
+      url: `${moduleName}/getAllUser`,
+      method: "get"
+    })
   }
-
-
-
-
 
 
 }

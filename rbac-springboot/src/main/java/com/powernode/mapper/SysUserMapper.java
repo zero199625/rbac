@@ -24,8 +24,11 @@ public interface SysUserMapper {
     List<String> getPermissionsByUserId(@Param("userId") Long userId);
 
     // 注意：持久层中，分页查询返回参数是集合类型
-    List getByPage(@Param("params") Map params);
+    List<SysUser> getByPage(@Param("params") Map params);
 
     SysUser selectByUserName(@Param("userName") String userName);
 
+    List<Integer> selectAllNomalUserId();
+
+    List<SysUser> getAllUser();
 }

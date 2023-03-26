@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import java.util.Date;
+import java.util.List;
 
 /*
 *   用户controller类
@@ -143,6 +144,28 @@ public class SysUserController extends BaseController {
     }
 
 
+    /**
+     *  根据用户名查询用户id
+     * @param userName
+     * @return
+     */
+    @GetMapping("getUserIdByUserName/{userName}")
+    public Result getUserIdByUserName(@PathVariable String userName){
+        System.out.println("用户名---->" + userName);
+        SysUser sysUser = sysUserService.selectByUserName(userName);
+        return new Result(sysUser.getUserId());
+    }
+
+
+    /**
+     *  获取所有用户信息
+     * @return
+     */
+    @GetMapping("getAllUser")
+    public Result getAllUser(){
+        List<SysUser> userList = sysUserService.getAllUser();
+        return new Result(userList);
+    }
 
 
 }

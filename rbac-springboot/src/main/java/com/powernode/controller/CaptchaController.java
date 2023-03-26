@@ -70,3 +70,16 @@ public class CaptchaController {
     }
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -28,4 +28,8 @@ public interface SysUserService{
     Page getByPage(Page page);
 
     SysUser selectByUserName(String userName);
+
+    List<Integer> selectAllNomalUserId();
+
+    List<SysUser> getAllUser();
 }

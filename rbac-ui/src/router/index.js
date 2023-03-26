@@ -116,6 +116,51 @@ export const constantRoutes = [
       }
     ]
   },
+  /* 收件箱 */
+  {
+    path: '/system/msg1',
+    component: Layout,
+    hidden: true,
+    children: [
+      {
+        /* 将dictType放入路由中，如果要用dictType就从路由中获取 */
+        path: 'receive',
+        component: () => import('@/views/system/sysMsg/sys-msg-receive'),
+        name: 'Data',
+        meta: { title: '收件箱'}
+      }
+    ]
+  },
+  /* 收件箱 */
+  {
+    path: '/system/msg2',
+    component: Layout,
+    hidden: true,
+    children: [
+      {
+        /* 将dictType放入路由中，如果要用dictType就从路由中获取 */
+        path: 'send',
+        component: () => import('@/views/system/sysMsg/sys-msg-send'),
+        name: 'Data',
+        meta: { title: '发件箱'}
+      }
+    ]
+  },
+  /* 收件箱 */
+  {
+    path: '/system/msg3',
+    component: Layout,
+    hidden: true,
+    children: [
+      {
+        /* 将dictType放入路由中，如果要用dictType就从路由中获取 */
+        path: 'dustbin',
+        component: () => import('@/views/system/sysMsg/sys-msg-dustbin'),
+        name: 'Data',
+        meta: { title: '垃圾箱'}
+      }
+    ]
+  },
 
   {
     path: '/guide',
